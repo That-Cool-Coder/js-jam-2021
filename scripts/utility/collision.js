@@ -35,3 +35,24 @@ function rectRectCollision(rect1Corner1, rect1Corner2, rect2Corner1, rect2Corner
         rect2Corner1.y > rect1Corner2.y ||
         rect2Corner2.y < rect1Corner1.y);
 }
+
+function lineLineIntersectPos(p1, p2, p3, p4) {
+    // returns intersection point of lines pos1>pos2, pos3>pos4
+    // returns null if no intersecton
+
+    var intersection = null;
+    var den = (pos1.x - pos2.x) * (pos3.y - pos4.y) - (pos1.y - pos2.y) * (pos3.x - pos4.x);
+
+    // if lines intersect (simple check)
+    if (den != 0) {
+        var t = ((pos1.x - pos3.x) * (pos3.y - pos4.y) - (pos1.y - pos3.y) * (pos3.x - pos4.x)) / den;
+        var u = -((pos1.x - pos2.x) * (pos1.y - pos3.y) - (pos1.y - pos2.y) * (pos1.x - pos3.x)) / den;
+        // if lines intersect (cpu intensive check)
+        if (t > 0 && t < 1 && u > 0) {
+            intersection = wrk.v(0, 0);
+            intersection.x = pos1.x + t * (pos2.x - pos1.x);
+            intersection.y = pos1.y + t * (pos2.y - pos1.y);
+        }
+    }
+    return intersection;
+}

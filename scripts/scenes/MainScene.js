@@ -1,12 +1,14 @@
 class MainScene extends wrk.GameEngine.Scene {
+    finishSequenceLength = 3000;
+
     constructor() {
         super('MainScene');
 
         this.worldHolder = new wrk.GameEngine.Entity('worldHolder', wrk.v(0, 0), 0);
         this.addChild(this.worldHolder);
 
-        this.player = new Player('player', wrk.v(200, 200));
-        this.mirrorPlayer = new Player('mirrorPlayer', wrk.v(600, 200), true);
+        this.normalPlayer = new Player('normalPlayer', wrk.v(0, 0));
+        this.mirroredPlayer = new Player('mirroredPlayer', wrk.v(0, 0), true);
 
         var frameRateShower = new FrameRateShower(wrk.v(50, 50), wrk.PI, {fill:0xffffff});
         this.addChild(frameRateShower);
@@ -17,9 +19,10 @@ class MainScene extends wrk.GameEngine.Scene {
     }
 
     loadLevel(levelData) {
-        this.cachedLevelData = levelData;
         this.worldHolder.removeChildren();
-        levelData.forEach(datum => {
+        this.cachedLevelData = levelData;
+
+        levelData.world.forEach(datum => {
             switch(datum.type) {
                 case 'Wall':
                     var item = new Wall(datum.position, datum.size);
@@ -27,20 +30,31 @@ class MainScene extends wrk.GameEngine.Scene {
                 case 'Finish':
                     var item = new Finish(datum.position, datum.forMirroredPlayer);
                     break;
+                case 'Laser':
+                    var item = new Laser(datum.position, datum.angle);
+                    break;
             }
             if (item) this.worldHolder.addChild(item);
         });
-        this.worldHolder.addChild(this.player);
-        this.worldHolder.addChild(this.mirrorPlayer);
+        this.normalPlayer.setLocalPosition(levelData.normalPlayerStartPos);
+        this.mirroredPlayer.setLocalPosition(levelData.mirroredPlayerStartPos);
+        this.normalPlayer.setFrozen(false);
+        this.mirroredPlayer.setFrozen(false);
+        this.worldHolder.addChild(this.normalPlayer);
+        this.worldHolder.addChild(this.mirroredPlayer);
+
+        this.showingFinishSequence = false;
     }
 
     finishLevel() {
-        this.player.setFrozen(true);
-        this.mirrorPlayer.setFrozen(true);
+        this.normalPlayer.setFrozen(true);
+        this.mirroredPlayer.setFrozen(true);
         wrk.GameEngine.getEntitiesWithTag('FinishParticleEffect').forEach(effect => {
             effect.play();
         });
         this.showingFinishSequence = true;
+
+        setTimeout(() => this.restartCrntLevel(), this.finishSequenceLength);
     }
 
     restartCrntLevel() {
@@ -49,8 +63,8 @@ class MainScene extends wrk.GameEngine.Scene {
 
     update() {
         if (! this.showingFinishSequence) {
-            if (this.player.isTouchingFinish && this.player.velocity.x == 0 &&
-                this.mirrorPlayer.isTouchingFinish && this.mirrorPlayer.velocity.x == 0) {
+            if (this.normalPlayer.isTouchingFinish && this.normalPlayer.velocity.x == 0 &&
+                this.mirroredPlayer.isTouchingFinish && this.mirroredPlayer.velocity.x == 0) {
                 this.finishLevel();  
             }
         }

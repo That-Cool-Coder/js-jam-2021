@@ -16,6 +16,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     worldComponentInteractions = {
         'Wall' : c => this.collideWithWorldComponent(c),
         'Finish' : c => this.interactWithFinish(c),
+        'KillerBlock' : c => {if (this.isTouching(c)) mainScene.restartCrntLevel()}
     }
     
     constructor(name, localPosition, mirrored=false) {
@@ -51,6 +52,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
             this.checkGrounded();
             this.feelGravity();
             this.controls();
+            this.dieIfOffScreen();
 
             wrk.v.add(this.localPosition, wrk.v.copyMult(this.velocity, wrk.GameEngine.deltaTime));
             
@@ -97,13 +99,26 @@ class Player extends wrk.GameEngine.DrawableEntity {
     startJump() {
         this.velocity.y = this.jumpSpeed;
     }
+
+    dieIfOffScreen() {
+        if (this.localPosition.x < 0 ||
+            this.localPosition.x > wrk.GameEngine.canvasSize.x || 
+            this.localPosition.y < 0 ||
+            this.localPosition.y > wrk.GameEngine.canvasSize.y) {
+                
+            mainScene.restartCrntLevel();
+        }
+    }
     
     // Collision stuff
     // ---------------
 
     interactWithWorld() {
         wrk.GameEngine.getEntitiesWithTag('WorldComponent').forEach(c => {
-            this.worldComponentInteractions[c.type](c);
+            var func = this.worldComponentInteractions[c.type];
+            if (func != undefined) {
+                func(c);
+            }
         });
     }
 
