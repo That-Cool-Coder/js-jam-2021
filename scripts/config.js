@@ -5,5 +5,8 @@ const config = {
     bgColor : 0x757575,
     targetSize : wrk.v(800, 450), // 16:9
     padding : wrk.v(10, 10),
-    version : 0
+    version : 0,
+
+    normalPlayerColor : 0xffffff,
+    mirroredPlayerColor : 0x000000
 }

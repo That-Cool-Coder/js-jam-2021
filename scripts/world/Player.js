@@ -9,12 +9,13 @@ class Player extends wrk.GameEngine.DrawableEntity {
     moveAcceleration = 300;
     moveDeceleration = 300;
     maxSpeed = 150;
-    jumpSpeed = -275;
+    jumpSpeed = -375;
 
-    gravity = wrk.v(0, 300);
+    gravity = wrk.v(0, 550);
 
     worldComponentInteractions = {
-        'Wall' : this.collideWithWorldComponent.bind(this)
+        'Wall' : c => this.collideWithWorldComponent(c),
+        'Finish' : c => this.interactWithFinish(c),
     }
     
     constructor(name, localPosition, mirrored=false) {
@@ -37,17 +38,25 @@ class Player extends wrk.GameEngine.DrawableEntity {
         this.velocity = wrk.v(0, 0);
 
         this.isGrounded = false;
+        this.isTouchingFinish = false;
+        this.isFrozen = false;
+    }
+
+    setFrozen(state) {
+        this.isFrozen = state;
     }
 
     update() {
-        this.checkGrounded();
-        this.feelGravity();
-        this.controls();
+        if (! this.isFrozen) {
+            this.checkGrounded();
+            this.feelGravity();
+            this.controls();
 
-        wrk.v.add(this.localPosition, wrk.v.copyMult(this.velocity, wrk.GameEngine.deltaTime));
-        
-        this.interactWithWorld();
-        
+            wrk.v.add(this.localPosition, wrk.v.copyMult(this.velocity, wrk.GameEngine.deltaTime));
+            
+            this.isTouchingFinish = false;
+            this.interactWithWorld();
+        }
     }
 
     // Movement
@@ -74,8 +83,12 @@ class Player extends wrk.GameEngine.DrawableEntity {
         }
 
         if (! leftOrRightInput) {
-            this.velocity.x -= wrk.sign(this.velocity.x) *
-                this.moveDeceleration * wrk.GameEngine.deltaTime;
+            if (wrk.abs(this.velocity.x) >
+                this.moveDeceleration * wrk.GameEngine.deltaTime) {
+                this.velocity.x -= wrk.sign(this.velocity.x) *
+                    this.moveDeceleration * wrk.GameEngine.deltaTime;
+            }
+            else this.velocity.x = 0;
         }
 
         this.velocity.x = wrk.constrain(this.velocity.x, -this.maxSpeed, this.maxSpeed);
@@ -169,5 +182,12 @@ class Player extends wrk.GameEngine.DrawableEntity {
                     break;
             }
         }
+    }
+
+    interactWithFinish(component) {
+        if (this.isTouching(component) && component.forMirroredPlayer == this.mirrored) {
+            this.isTouchingFinish = true;
+        }
+        this.collideWithWorldComponent(component);
     }
 }

@@ -1,6 +1,6 @@
 class WorldComponent extends wrk.GameEngine.DrawableEntity {
     constructor(type, topLeftCorner, size, color=0x000000) {
-        super(type, topLeftCorner, wrk.PI, PIXI.Texture.WHITE, size, wrk.v(0, 0));
+        super(type, topLeftCorner, 0, PIXI.Texture.WHITE, size, wrk.v(1, 1));
         this.addTag('WorldComponent');
         this.addTag(type);
         this.type = type;
