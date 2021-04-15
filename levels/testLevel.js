@@ -17,6 +17,6 @@ const testLevel = {
 
         {type : 'Laser', position : wrk.v(400, 380), angle : 0},
 
-        {type : 'Mirror', position : wrk.v(600, 380), angle : 0.6, width : 20}
+        {type : 'Mirror', position : wrk.v(600, 380), angle : -0.3, width : 20}
     ]
 }

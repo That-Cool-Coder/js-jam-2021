@@ -34,7 +34,7 @@ class Laser extends wrk.GameEngine.DrawableEntity {
 
             // Set up some vars to hold the results
             var closestContactDist = Infinity;
-            var closestContactPosition = null;
+            var closestContactPosition = beamEndPostion;
             var closestContactEntity = null;
 
             // These are all of the entities which we can interact with
@@ -64,9 +64,12 @@ class Laser extends wrk.GameEngine.DrawableEntity {
                 }
             };
 
+            // Add the contact position
+            // (if no contact occured then this will just be the end of the beam)
+            this.beamBouncePositions.push(closestContactPosition);
+
             // If we did get a collision, then either reflect or terminate
             if (closestContactEntity != null) {
-                this.beamBouncePositions.push(closestContactPosition);
                 if (closestContactEntity.tags.includes('Mirror')) {
                     var mirror = closestContactEntity;
                     var beamDisplacement = wrk.v.copySub(

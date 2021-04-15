@@ -48,7 +48,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     }
 
     update() {
-        if (! this.isFrozen) {
+        if (! this.isFrozen && wrk.GameEngine.deltaTime < config.maxAllowableDeltaTime) {
             this.checkGrounded();
             this.feelGravity();
             this.controls();
