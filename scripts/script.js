@@ -26,7 +26,7 @@ resizeCanvas();
 
 // Setup scenes
 var mainScene = new MainScene();
-mainScene.loadLevel(testLevel);
+var titleScreen = new TitleScreen();
 
 
-wrk.GameEngine.selectScene(mainScene);
+wrk.GameEngine.selectScene(titleScreen);

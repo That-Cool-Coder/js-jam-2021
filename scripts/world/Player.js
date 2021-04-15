@@ -175,13 +175,13 @@ class Player extends wrk.GameEngine.DrawableEntity {
                 case 'left':
                     var overlap = component.bottomRightPos.x - this.topLeftPos.x;
                     this.localPosition.x += overlap;
-                    this.velocity.x = 0;
+                    if (this.velocity.x < 0) this.velocity.x = 0;
                     break;
 
                 case 'right':
                     var overlap = this.bottomRightPos.x - component.topLeftPos.x;
                     this.localPosition.x -= overlap;
-                    this.velocity.x = 0;
+                    if (this.velocity.x > 0) this.velocity.x = 0;
                     break;
 
                 case 'top':
@@ -200,7 +200,8 @@ class Player extends wrk.GameEngine.DrawableEntity {
     }
 
     interactWithFinish(component) {
-        if (this.isTouching(component) && component.forMirroredPlayer == this.mirrored) {
+        if (this.collisionSide(component) == 'bottom'
+            && component.forMirroredPlayer == this.mirrored) {
             this.isTouchingFinish = true;
         }
         this.collideWithWorldComponent(component);

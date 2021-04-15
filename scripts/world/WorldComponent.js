@@ -1,4 +1,6 @@
 class WorldComponent extends wrk.GameEngine.DrawableEntity {
+    // This is a class for anything that the player can touch
+
     constructor(type, topLeftCorner, size, color=0x000000) {
         super(type, topLeftCorner, 0, PIXI.Texture.WHITE, size, wrk.v(1, 1));
         this.addTag('WorldComponent');

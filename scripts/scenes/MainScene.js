@@ -33,6 +33,9 @@ class MainScene extends wrk.GameEngine.Scene {
                 case 'Laser':
                     var item = new Laser(datum.position, datum.angle);
                     break;
+                case 'Mirror':
+                    var item = new Mirror(datum.position, datum.angle, datum.width);
+                    break;
             }
             if (item) this.worldHolder.addChild(item);
         });

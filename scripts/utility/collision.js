@@ -36,7 +36,7 @@ function rectRectCollision(rect1Corner1, rect1Corner2, rect2Corner1, rect2Corner
         rect2Corner2.y < rect1Corner1.y);
 }
 
-function lineLineIntersectPos(p1, p2, p3, p4) {
+function lineLineIntersectPos(pos1, pos2, pos3, pos4) {
     // returns intersection point of lines pos1>pos2, pos3>pos4
     // returns null if no intersecton
 
