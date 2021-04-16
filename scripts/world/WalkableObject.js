@@ -1,9 +1,9 @@
-class WorldComponent extends wrk.GameEngine.DrawableEntity {
-    // This is a class for anything that the player can touch
+class WalkableObject extends wrk.GameEngine.DrawableEntity {
+    // This is a class for anything that the player can touch and walk on
 
     constructor(type, topLeftCorner, size, color=0x000000) {
         super(type, topLeftCorner, 0, PIXI.Texture.WHITE, size, wrk.v(1, 1));
-        this.addTag('WorldComponent');
+        this.addTag('WalkableObject');
         this.addTag(type);
         this.type = type;
         this.size = wrk.v.copy(size);

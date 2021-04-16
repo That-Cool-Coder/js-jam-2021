@@ -1,5 +1,5 @@
 class Mirror extends wrk.GameEngine.DrawableEntity {
-    // This is static because they are used in super
+    // This is static because it is used in super()
     static thickness = 3;
 
     color = 0xdddddd;

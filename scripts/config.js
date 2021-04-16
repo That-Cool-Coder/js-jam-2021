@@ -14,6 +14,14 @@ const config = {
     normalPlayerColor : 0xffffff,
     mirroredPlayerColor : 0x000000,
 
+    hintTextStyle : {
+        fill: "white",
+        fontFamily: "\"Courier New\", Courier, monospace",
+        fontSize: 18,
+        align : "center",
+        stroke: "black"
+    },
+
     normalTextStyle : {
         fill: "white",
         fontFamily: "\"Courier New\", Courier, monospace",

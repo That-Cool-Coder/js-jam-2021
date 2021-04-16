@@ -1,4 +1,4 @@
-class Finish extends WorldComponent {
+class Finish extends WalkableObject {
     static size = wrk.v(50, 10);
 
     constructor(topLeftCorner, forMirroredPlayer) {

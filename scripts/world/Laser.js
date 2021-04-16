@@ -1,5 +1,5 @@
 class Laser extends wrk.GameEngine.DrawableEntity {
-    // This is static because they are used in super()
+    // This is static because it is used in super()
     static size = wrk.v(30, 15);
 
     color = 0x999999;

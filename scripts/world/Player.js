@@ -70,18 +70,21 @@ class Player extends wrk.GameEngine.DrawableEntity {
 
     controls() {
         var leftOrRightInput = false;
-        if (wrk.GameEngine.keyboard.keyIsDown('ArrowLeft')) {
+        if (wrk.GameEngine.keyboard.keyIsDown('ArrowLeft') || 
+            wrk.GameEngine.keyboard.keyIsDown('A')) {
             this.velocity.x -= this.moveAcceleration *
                 wrk.GameEngine.deltaTime * this.mirrorMult;
             leftOrRightInput = true;
         }
-        if (wrk.GameEngine.keyboard.keyIsDown('ArrowRight')) {
+        if (wrk.GameEngine.keyboard.keyIsDown('ArrowRight') || 
+            wrk.GameEngine.keyboard.keyIsDown('D')) {
             this.velocity.x += this.moveAcceleration *
                 wrk.GameEngine.deltaTime * this.mirrorMult;
             leftOrRightInput = true;
         }
-        if (wrk.GameEngine.keyboard.keyIsDown('Space') && this.isGrounded) {
-            this.startJump();
+        if (wrk.GameEngine.keyboard.keyIsDown('ArrowUp') || 
+            wrk.GameEngine.keyboard.keyIsDown('W')) {
+            if (this.isGrounded) this.startJump();
         }
 
         if (! leftOrRightInput) {
@@ -114,7 +117,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     // ---------------
 
     interactWithWorld() {
-        wrk.GameEngine.getEntitiesWithTag('WorldComponent').forEach(c => {
+        wrk.GameEngine.getEntitiesWithTag('WalkableObject').forEach(c => {
             var func = this.worldComponentInteractions[c.type];
             if (func != undefined) {
                 func(c);
@@ -134,7 +137,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
 
         // Use a for...of instead of a foreach to allow break
         var grounded = false;
-        var worldComponents = wrk.GameEngine.getEntitiesWithTag('WorldComponent');
+        var worldComponents = wrk.GameEngine.getEntitiesWithTag('WalkableObject');
         for (var component of worldComponents) {
             if (this.collisionSide(component) == 'bottom') {
                 grounded = true;

@@ -23,6 +23,7 @@ class MainScene extends wrk.GameEngine.Scene {
         this.cachedLevelData = levelData;
 
         levelData.world.forEach(datum => {
+            console.log(datum.type)
             switch(datum.type) {
                 case 'Wall':
                     var item = new Wall(datum.position, datum.size);
@@ -35,6 +36,9 @@ class MainScene extends wrk.GameEngine.Scene {
                     break;
                 case 'Mirror':
                     var item = new Mirror(datum.position, datum.angle, datum.width);
+                    break;
+                case 'Hint':
+                    var item = new Hint(datum.text, datum.position, datum.angle);
                     break;
             }
             if (item) this.worldHolder.addChild(item);
