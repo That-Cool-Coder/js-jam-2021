@@ -26,6 +26,7 @@ resizeCanvas();
 
 // Setup scenes
 var mainScene = new MainScene();
+var levelSelectScene = new LevelSelectScene();
 var titleScreen = new TitleScreen();
 
 

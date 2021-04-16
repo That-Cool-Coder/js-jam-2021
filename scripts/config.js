@@ -43,5 +43,6 @@ const config = {
         stroke: "black"
     },
 
-    buttonTexture : wrk.GameEngine.Texture.fromUrl('images/button.png')
+    buttonTexture1x1 : wrk.GameEngine.Texture.fromUrl('images/button1x1.png'),
+    buttonTexture1x2 : wrk.GameEngine.Texture.fromUrl('images/button1x2.png')
 }

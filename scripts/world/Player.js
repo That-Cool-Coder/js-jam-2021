@@ -158,16 +158,8 @@ class Player extends wrk.GameEngine.DrawableEntity {
     }
 
     collisionSide(component) {
-
-        // Put these in in vars as they are recursive getters
-        var selfTopLeft = this.topLeftPos;
-        var componentTopLeft = component.topLeftPos;
-        var componentBottomRight = component.bottomRightPos;
-
-        var componentColliderSize = wrk.v.copySub(componentBottomRight, componentTopLeft);
-
-        return rectRectCollisionSide(selfTopLeft, this.colliderSize,
-            componentTopLeft, componentColliderSize);
+        return rectRectCollisionSide(this.topLeftPos, this.textureSize,
+            component.topLeftPos, component.size);
     }
 
     collideWithWorldComponent(component) {

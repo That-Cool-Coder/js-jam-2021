@@ -23,7 +23,6 @@ class MainScene extends wrk.GameEngine.Scene {
         this.cachedLevelData = levelData;
 
         levelData.world.forEach(datum => {
-            console.log(datum.type)
             switch(datum.type) {
                 case 'Wall':
                     var item = new Wall(datum.position, datum.size);

@@ -9,11 +9,13 @@ class TitleScreen extends wrk.GameEngine.Scene {
         this.addChild(title);
 
         var button = new wrk.GameEngine.Button('Play button',
-            wrk.v(center.x, center.y + 100), wrk.PI, wrk.v(80, 35), config.buttonTexture, 
+            wrk.v(center.x, center.y + 100), wrk.PI, wrk.v(80, 35), config.buttonTexture1x2, 
             'Play', config.headingTextStyle);
         button.mouseUpCallbacks.add(() => {
-            wrk.GameEngine.selectScene(mainScene);
-            mainScene.loadLevel(testLevel);
+            SceneTransitionFade.fade('in', () => {
+                wrk.GameEngine.selectScene(levelSelectScene);
+                SceneTransitionFade.fade('out');
+            });
         });
         this.addChild(button);
     }
