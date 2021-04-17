@@ -23,11 +23,14 @@ class LevelSelectScene extends wrk.GameEngine.Scene {
             var button = new wrk.GameEngine.Button(`levelbutton${idx + 1}`, pos,
                 wrk.PI, this.levelButtonSize, this.levelButtonTexture, idx + 1,
                 config.normalTextStyle);
-            this.addChild(button);
             button.mouseUpCallbacks.add(() => {
                 mainScene.loadLevel(level);
-                wrk.GameEngine.selectScene(mainScene);
+                SceneTransitionFade.fade('in', () => {
+                    wrk.GameEngine.selectScene(mainScene);
+                    SceneTransitionFade.fade('out');
+                });
             })
+            this.addChild(button);
 
             crntCol += 1;
             if (crntCol >= this.maxLevelsPerRow)  {

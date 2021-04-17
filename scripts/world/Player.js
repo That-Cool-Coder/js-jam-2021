@@ -6,17 +6,17 @@ class Player extends wrk.GameEngine.DrawableEntity {
     nonMirroredColor = 0xffffff;
     mirroredColor = 0x000000;
 
-    moveAcceleration = 300;
-    moveDeceleration = 300;
+    moveAcceleration = 600;
+    moveDeceleration = 600;
     maxSpeed = 150;
     jumpSpeed = -375;
-
+    physicsAccuracy = 5;
     gravity = wrk.v(0, 550);
 
     worldComponentInteractions = {
         'Wall' : c => this.collideWithWorldComponent(c),
         'Finish' : c => this.interactWithFinish(c),
-        'KillerBlock' : c => {if (this.isTouching(c)) mainScene.restartCrntLevel()}
+        'KillerBlock' : c => {if (this.isTouching(c)) this.die()}
     }
     
     constructor(name, localPosition, mirrored=false) {
@@ -51,13 +51,17 @@ class Player extends wrk.GameEngine.DrawableEntity {
         if (! this.isFrozen && wrk.GameEngine.deltaTime < config.maxAllowableDeltaTime) {
             this.checkGrounded();
             this.feelGravity();
+            if (this.isGrounded) this.velocity.y = 0;
             this.controls();
             this.dieIfOffScreen();
 
-            wrk.v.add(this.localPosition, wrk.v.copyMult(this.velocity, wrk.GameEngine.deltaTime));
-            
+            // Do physics multiple times to stop things clipping through other things!
             this.isTouchingFinish = false;
-            this.interactWithWorld();
+            wrk.doNTimes(this.physicsAccuracy, () => {
+                wrk.v.add(this.localPosition,
+                    wrk.v.copyMult(this.velocity, wrk.GameEngine.deltaTime  / this.physicsAccuracy));
+                this.interactWithWorld();
+            });
         }
     }
 
@@ -109,8 +113,16 @@ class Player extends wrk.GameEngine.DrawableEntity {
             this.localPosition.y < 0 ||
             this.localPosition.y > wrk.GameEngine.canvasSize.y) {
                 
-            mainScene.restartCrntLevel();
+            this.die();
         }
+    }
+
+    die() {
+        this.setFrozen(true);
+        SceneTransitionFade.fade('in', () => {
+            mainScene.restartCrntLevel();
+            SceneTransitionFade.fade('out');
+        });
     }
     
     // Collision stuff

@@ -1,5 +1,5 @@
 class MainScene extends wrk.GameEngine.Scene {
-    finishSequenceLength = 3000;
+    finishSequenceLength = 2000;
 
     constructor() {
         super('MainScene');
@@ -60,7 +60,12 @@ class MainScene extends wrk.GameEngine.Scene {
         });
         this.showingFinishSequence = true;
 
-        setTimeout(() => this.restartCrntLevel(), this.finishSequenceLength);
+        setTimeout(() => {
+            SceneTransitionFade.fade('in', () => {
+                wrk.GameEngine.selectScene(levelSelectScene);
+                SceneTransitionFade.fade('out');
+            });
+        }, this.finishSequenceLength);
     }
 
     restartCrntLevel() {

@@ -12,11 +12,10 @@ class SceneTransitionFade {
             this.fadeSprite = new wrk.GameEngine.DrawableEntity('fadeSprite',
                 wrk.v(0, 0), wrk.PI, PIXI.Texture.WHITE, wrk.GameEngine.canvasSize, wrk.v(0, 0));
             this.fadeSprite.setTint(this.color);
-
         }
 
         if (this.fadeSprite.isInScene) {
-            this.fadeSprite.containingScene.removeChild(this.fadeSprite);
+            this.fadeSprite.parent.removeChild(this.fadeSprite);
         }
 
         wrk.GameEngine.crntScene.addChild(this.fadeSprite);
@@ -31,6 +30,8 @@ class SceneTransitionFade {
     }
 
     static continueFade() {
+
+        // First of all just increment the fade
         if (this.fadeDirection == 'in') {
             this.fadeSprite.setAlpha(this.fadeSprite.alpha + 1 / (this.duration / this.updateInterval));
         }
@@ -38,8 +39,10 @@ class SceneTransitionFade {
             this.fadeSprite.setAlpha(this.fadeSprite.alpha - 1 / (this.duration / this.updateInterval));
         }
 
+        // Then apply
         this.fadeSprite.setAlpha(wrk.constrain(this.fadeSprite.alpha, 0, 1));
 
+        // Check if we're done yet
         var hasFinishedFade = false;
         if (this.fadeDirection == 'in' && this.fadeSprite.alpha == 1) {
             hasFinishedFade = true;
@@ -48,11 +51,15 @@ class SceneTransitionFade {
             hasFinishedFade = true;
         }
 
-        if (! hasFinishedFade) {
-            setTimeout(() => this.continueFade(), this.duration / this.updateInterval);
+        if (hasFinishedFade) {
+            if (this.fadeDirection == 'out') {
+                this.fadeSprite.parent.removeChild(this.fadeSprite);
+            }
+            this.onCompleteCallback();
         }
         else {
-            this.onCompleteCallback();
+            // If we're not done, continue!
+            setTimeout(() => this.continueFade(), this.duration / this.updateInterval);
         }
     }
 }
