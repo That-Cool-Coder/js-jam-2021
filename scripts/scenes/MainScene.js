@@ -59,6 +59,7 @@ class MainScene extends wrk.GameEngine.Scene {
             effect.play();
         });
         this.showingFinishSequence = true;
+        ProgressManagement.unlockNextLevel();
 
         setTimeout(() => {
             SceneTransitionFade.fade('in', () => {

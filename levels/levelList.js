@@ -1,1 +1,1 @@
-const levelList = [level1, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+const levelList = [level1, level2, level3];

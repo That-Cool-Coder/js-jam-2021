@@ -1,7 +1,6 @@
 class LevelSelectScene extends wrk.GameEngine.Scene {
     maxLevelsPerRow = 5;
     levelButtonSize = wrk.v(50, 50);
-    levelButtonTexture = config.buttonTexture1x1;
     levelButtonVerticalSeperation = 75;
 
     constructor() {
@@ -10,6 +9,14 @@ class LevelSelectScene extends wrk.GameEngine.Scene {
         var heading = new wrk.GameEngine.Label('heading', 'Select a level',
             wrk.v(wrk.GameEngine.canvasSize.x / 2, 50), wrk.PI, config.headingTextStyle);
         this.addChild(heading);
+        
+        this.levelButtonHolder = new wrk.GameEngine.Entity('levelButtonHolder', wrk.v(0, 0), 0);
+        this.addChild(this.levelButtonHolder);
+    }
+
+    onSelected() {
+        // Make sure that the levels are reset
+        this.levelButtonHolder.removeChildren();
         this.createLevelButtons();
     }
 
@@ -17,20 +24,35 @@ class LevelSelectScene extends wrk.GameEngine.Scene {
         var crntRow = 0;
         var crntCol = 0;
         var buttonSeperation = wrk.GameEngine.canvasSize.x / this.maxLevelsPerRow;
-        levelList.forEach((level, idx) => {
+        levelList.forEach(level => {
             var pos = wrk.v(buttonSeperation * crntCol + buttonSeperation / 2,
                 this.levelButtonVerticalSeperation * crntRow + 150);
-            var button = new wrk.GameEngine.Button(`levelbutton${idx + 1}`, pos,
-                wrk.PI, this.levelButtonSize, this.levelButtonTexture, idx + 1,
+
+            if (ProgressManagement.hasUnlockedLevel(level.levelNum)) {
+                var texture = config.buttonTexture1x1;
+                var text = level.levelNum;
+            }
+            else {
+                var texture = config.lockedButtonTexture1x1;
+                var text = '';
+            }
+
+            var button = new wrk.GameEngine.Button(`levelbutton${level.levelNum}`, pos,
+                wrk.PI, this.levelButtonSize, texture, text,
                 config.normalTextStyle);
-            button.mouseUpCallbacks.add(() => {
-                mainScene.loadLevel(level);
-                SceneTransitionFade.fade('in', () => {
-                    wrk.GameEngine.selectScene(mainScene);
-                    SceneTransitionFade.fade('out');
-                });
-            })
-            this.addChild(button);
+
+            // Only bind the start level to unlocked buttons
+            if (ProgressManagement.hasUnlockedLevel(level.levelNum)) {
+                button.mouseUpCallbacks.add(() => {
+                    mainScene.loadLevel(level);
+                    SceneTransitionFade.fade('in', () => {
+                        wrk.GameEngine.selectScene(mainScene);
+                        SceneTransitionFade.fade('out');
+                    });
+                })
+            }
+
+            this.levelButtonHolder.addChild(button);
 
             crntCol += 1;
             if (crntCol >= this.maxLevelsPerRow)  {

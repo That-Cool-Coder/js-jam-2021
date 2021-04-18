@@ -1,4 +1,5 @@
 const level1 = {
+    levelNum : 1,
     normalPlayerStartPos : wrk.v(200, 350),
     mirroredPlayerStartPos : wrk.v(600, 350),
 

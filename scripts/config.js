@@ -44,5 +44,6 @@ const config = {
     },
 
     buttonTexture1x1 : wrk.GameEngine.Texture.fromUrl('images/button1x1.png'),
-    buttonTexture1x2 : wrk.GameEngine.Texture.fromUrl('images/button1x2.png')
+    lockedButtonTexture1x1 : wrk.GameEngine.Texture.fromUrl('images/button1x1locked.png'),
+    buttonTexture1x2 : wrk.GameEngine.Texture.fromUrl('images/button1x2.png'),
 }
