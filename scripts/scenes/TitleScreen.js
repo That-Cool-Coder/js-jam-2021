@@ -5,12 +5,12 @@ class TitleScreen extends wrk.GameEngine.Scene {
         var center = wrk.v.copyDiv(wrk.GameEngine.canvasSize, 2);
 
         var title = new wrk.GameEngine.Label('title', config.gameName,
-            center, wrk.PI, config.titleTextStyle);
+            wrk.v(center.x, center.y - 30), wrk.PI, config.headingTextStyle);
         this.addChild(title);
 
         var button = new wrk.GameEngine.Button('Play button',
-            wrk.v(center.x, center.y + 100), wrk.PI, wrk.v(80, 35), config.buttonTexture1x2, 
-            'Play', config.headingTextStyle);
+            wrk.v(center.x, center.y + 50), wrk.PI, wrk.v(75, 40), config.buttonTexture1x2, 
+            'Play', config.normalTextStyle);
         button.mouseUpCallbacks.add(() => {
             SceneTransitionFade.fade('in', () => {
                 wrk.GameEngine.selectScene(levelSelectScene);

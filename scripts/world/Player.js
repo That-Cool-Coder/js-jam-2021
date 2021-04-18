@@ -10,7 +10,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     moveDeceleration = 600;
     maxSpeed = 150;
     jumpSpeed = -375;
-    physicsAccuracy = 5;
+    physicsAccuracy = 3;
     gravity = wrk.v(0, 550);
 
     worldComponentInteractions = {

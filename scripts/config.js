@@ -25,14 +25,14 @@ const config = {
     normalTextStyle : {
         fill: "white",
         fontFamily: "\"Courier New\", Courier, monospace",
-        fontSize: 18,
+        fontSize: 26,
         stroke: "black"
     },
 
     headingTextStyle : {
         fill: "white",
         fontFamily: "\"Courier New\", Courier, monospace",
-        fontSize: 26,
+        fontSize: 38,
         stroke: "black"
     },
 
@@ -42,6 +42,8 @@ const config = {
         fontSize: 50,
         stroke: "black"
     },
+
+    mainThemeSong : new wrk.Sound('sounds/mainTheme.wav'),
 
     buttonTexture1x1 : wrk.GameEngine.Texture.fromUrl('images/button1x1.png'),
     lockedButtonTexture1x1 : wrk.GameEngine.Texture.fromUrl('images/button1x1locked.png'),

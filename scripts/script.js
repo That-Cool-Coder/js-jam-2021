@@ -28,6 +28,15 @@ resizeCanvas();
 var mainScene = new MainScene();
 var levelSelectScene = new LevelSelectScene();
 var titleScreen = new TitleScreen();
+var pauseMenu = new PauseMenu();
 
+// Wait for a user interaction before starting music
+var mainThemePlaying = false;
+wrk.GameEngine.mouse.onPointerDown.add(() => {
+    if (! mainThemePlaying) {
+        config.mainThemeSong.loop();
+        mainThemePlaying = true;
+    }
+})
 
 wrk.GameEngine.selectScene(titleScreen);

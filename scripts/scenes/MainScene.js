@@ -7,11 +7,25 @@ class MainScene extends wrk.GameEngine.Scene {
         this.worldHolder = new wrk.GameEngine.Entity('worldHolder', wrk.v(0, 0), 0);
         this.addChild(this.worldHolder);
 
+        this.ui = new wrk.GameEngine.Entity('ui', wrk.v(0, 0), 0);
+        this.addChild(this.ui);
+
         this.normalPlayer = new Player('normalPlayer', wrk.v(0, 0));
         this.mirroredPlayer = new Player('mirroredPlayer', wrk.v(0, 0), true);
 
         var frameRateShower = new FrameRateShower(wrk.v(50, 50), wrk.PI, {fill:0xffffff});
-        this.addChild(frameRateShower);
+        this.ui.addChild(frameRateShower);
+
+        var pos = wrk.v.copySub(wrk.GameEngine.canvasSize, wrk.v(50, 25))
+        var pauseButton = new wrk.GameEngine.Button('pauseButton', pos, wrk.PI,
+            wrk.v(100, 50), config.buttonTexture1x2, 'Pause', config.normalTextStyle);
+        pauseButton.mouseUpCallbacks.add(() => {
+            SceneTransitionFade.fade('in', () => {
+                wrk.GameEngine.selectScene(pauseMenu);
+                SceneTransitionFade.fade('out');
+            });
+        });
+        this.ui.addChild(pauseButton);
 
         this.showingFinishSequence = false;
 
@@ -46,8 +60,14 @@ class MainScene extends wrk.GameEngine.Scene {
         this.mirroredPlayer.setLocalPosition(levelData.mirroredPlayerStartPos);
         this.normalPlayer.setFrozen(false);
         this.mirroredPlayer.setFrozen(false);
+        wrk.v.makeZero(this.normalPlayer.velocity);
+        wrk.v.makeZero(this.mirroredPlayer.velocity);
         this.worldHolder.addChild(this.normalPlayer);
         this.worldHolder.addChild(this.mirroredPlayer);
+
+        // Move ui to front
+        this.removeChild(this.ui);
+        this.addChild(this.ui);
 
         this.showingFinishSequence = false;
     }

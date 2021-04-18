@@ -18,8 +18,8 @@ const level1 = {
         {type : 'Wall', position : wrk.v(200, 200), size : wrk.v(100, 20)},
         {type : 'Wall', position : wrk.v(500, 200), size : wrk.v(100, 20)},
 
-        {type : 'Finish', position : wrk.v(225, 190), forMirroredPlayer : true},
-        {type : 'Finish', position : wrk.v(525, 190), forMirroredPlayer : false},
+        {type : 'Finish', position : wrk.v(225, 200), forMirroredPlayer : true},
+        {type : 'Finish', position : wrk.v(525, 200), forMirroredPlayer : false},
 
         {type : 'Laser', position : wrk.v(400, 380), angle : 0},
 

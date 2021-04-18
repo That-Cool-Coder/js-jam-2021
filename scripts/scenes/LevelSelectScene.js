@@ -9,6 +9,16 @@ class LevelSelectScene extends wrk.GameEngine.Scene {
         var heading = new wrk.GameEngine.Label('heading', 'Select a level',
             wrk.v(wrk.GameEngine.canvasSize.x / 2, 50), wrk.PI, config.headingTextStyle);
         this.addChild(heading);
+
+        var backButton = new wrk.GameEngine.Button('backButton', wrk.v(100, 50),
+            wrk.PI, wrk.v(80, 40), config.buttonTexture1x2, 'Back', config.normalTextStyle);
+        backButton.mouseUpCallbacks.add(() => {
+            SceneTransitionFade.fade('in', () => {
+                wrk.GameEngine.selectScene(titleScreen);
+                SceneTransitionFade.fade('out');
+            });
+        });
+        this.addChild(backButton);
         
         this.levelButtonHolder = new wrk.GameEngine.Entity('levelButtonHolder', wrk.v(0, 0), 0);
         this.addChild(this.levelButtonHolder);
