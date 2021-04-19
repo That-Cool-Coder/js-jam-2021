@@ -1,7 +1,7 @@
 const level5 = {
     levelNum : 5,
-    normalPlayerStartPos : wrk.v(350, 100),
-    mirroredPlayerStartPos : wrk.v(450, 100),
+    normalPlayerStartPos : wrk.v(150, 350),
+    mirroredPlayerStartPos : wrk.v(650, 350),
 
     world : [
         // These four are the basic border
@@ -10,13 +10,17 @@ const level5 = {
         {type : 'Wall', position : wrk.v(780, 0), size : wrk.v(20, 400)},
         {type : 'Wall', position : wrk.v(0, 0), size : wrk.v(800, 20)},
 
-        {type : 'Wall', position : wrk.v(0, 200), size : wrk.v(280, 20)},
-        {type : 'Wall', position : wrk.v(320, 200), size : wrk.v(310, 20)},
-        {type : 'Wall', position : wrk.v(670, 200), size : wrk.v(130, 20)},
+        {type : 'Wall', position : wrk.v(250, 350), size : wrk.v(40, 50)},
+        {type : 'Wall', position : wrk.v(290, 300), size : wrk.v(40, 100)},
+        {type : 'Wall', position : wrk.v(330, 250), size : wrk.v(40, 150)},
+        {type : 'Wall', position : wrk.v(370, 300), size : wrk.v(40, 100)},
+        {type : 'Wall', position : wrk.v(410, 350), size : wrk.v(40, 50)},
+        
+        {type : 'Wall', position : wrk.v(100, 160), size : wrk.v(200, 20)},
 
-        {type : 'Finish', position : wrk.v(75, 100), forMirroredPlayer : false},
-        {type : 'Finish', position : wrk.v(675, 400), forMirroredPlayer : true},
+        {type : 'Finish', position : wrk.v(75, 400), forMirroredPlayer : false},
+        {type : 'Finish', position : wrk.v(125, 400), forMirroredPlayer : true},
 
-        {type : 'Hint', text : 'If you get stuck,\n click pause then restart', position : wrk.v(config.targetSize.x / 2, 50)}
+        {type : 'Hint', text : 'Even simple-looking levels like this one can be difficult', position : wrk.v(config.targetSize.x / 2, 50)}
     ]
 }

@@ -22,6 +22,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     constructor(name, localPosition, mirrored=false) {
         super(name, localPosition, wrk.PI, Player.texture, Player.size);
         this.addTag('Player');
+        this.addTag(mirrored ? 'MirroredPlayer' : 'NormalPlayer');
         this.colliderSize = wrk.v.copy(this.textureSize);
         this.mirrored = mirrored;
 
