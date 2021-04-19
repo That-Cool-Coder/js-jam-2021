@@ -4,13 +4,11 @@ const level3 = {
     mirroredPlayerStartPos : wrk.v(240, 350),
 
     world : [
-        {type : 'Wall', position : wrk.v(0, 400), size : wrk.v(400, 50)},
-        {type : 'Wall', position : wrk.v(400, 400), size : wrk.v(400, 50)},
-
-        {type : 'Wall', position : wrk.v(0, 0), size : wrk.v(20, 200)},
-        {type : 'Wall', position : wrk.v(0, 200), size : wrk.v(20, 200)},
-        {type : 'Wall', position : wrk.v(780, 0), size : wrk.v(20, 200)},
-        {type : 'Wall', position : wrk.v(780, 200), size : wrk.v(20, 200)},
+        // These four are the basic border
+        {type : 'Wall', position : wrk.v(0, 400), size : wrk.v(800, 50)},
+        {type : 'Wall', position : wrk.v(0, 0), size : wrk.v(20, 400)},
+        {type : 'Wall', position : wrk.v(780, 0), size : wrk.v(20, 400)},
+        {type : 'Wall', position : wrk.v(0, 0), size : wrk.v(800, 20)},
 
         {type : 'Wall', position : wrk.v(475, 300), size : wrk.v(20, 100)},
 

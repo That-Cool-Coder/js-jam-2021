@@ -43,7 +43,7 @@ const config = {
         stroke: "black"
     },
 
-    mainThemeSong : new wrk.Sound('sounds/mainTheme.wav'),
+    mainThemeSong : new wrk.Sound('sounds/mainTheme.mp3'),
 
     buttonTexture1x1 : wrk.GameEngine.Texture.fromUrl('images/button1x1.png'),
     lockedButtonTexture1x1 : wrk.GameEngine.Texture.fromUrl('images/button1x1locked.png'),

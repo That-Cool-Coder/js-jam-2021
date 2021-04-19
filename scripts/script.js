@@ -24,6 +24,10 @@ window.addEventListener('resize', resizeCanvas);
 
 resizeCanvas();
 
+var settings = {
+    muted : false
+}
+
 // Setup scenes
 var mainScene = new MainScene();
 var levelSelectScene = new LevelSelectScene();
@@ -31,11 +35,11 @@ var titleScreen = new TitleScreen();
 var pauseMenu = new PauseMenu();
 
 // Wait for a user interaction before starting music
-var mainThemePlaying = false;
+var hasStartedMainTheme = false;
 wrk.GameEngine.mouse.onPointerDown.add(() => {
-    if (! mainThemePlaying) {
+    if (! hasStartedMainTheme) {
         config.mainThemeSong.loop();
-        mainThemePlaying = true;
+        hasStartedMainTheme = true;
     }
 })
 

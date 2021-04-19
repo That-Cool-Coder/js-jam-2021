@@ -16,9 +16,13 @@ class MainScene extends wrk.GameEngine.Scene {
         var frameRateShower = new FrameRateShower(wrk.v(50, 50), wrk.PI, {fill:0xffffff});
         this.ui.addChild(frameRateShower);
 
-        var pos = wrk.v.copySub(wrk.GameEngine.canvasSize, wrk.v(50, 25))
+        var pos = wrk.v.copySub(wrk.GameEngine.canvasSize, wrk.v(20, 25));
+        var muteButton = new MuteButton(pos);
+        this.ui.addChild(muteButton);
+
+        var pos = wrk.v.copySub(wrk.GameEngine.canvasSize, wrk.v(90, 25));
         var pauseButton = new wrk.GameEngine.Button('pauseButton', pos, wrk.PI,
-            wrk.v(100, 50), config.buttonTexture1x2, 'Pause', config.normalTextStyle);
+            wrk.v(90, 40), config.buttonTexture1x2, 'Pause', config.normalTextStyle);
         pauseButton.mouseUpCallbacks.add(() => {
             SceneTransitionFade.fade('in', () => {
                 wrk.GameEngine.selectScene(pauseMenu);
