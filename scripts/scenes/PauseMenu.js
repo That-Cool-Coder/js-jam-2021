@@ -1,6 +1,8 @@
 class PauseMenu extends wrk.GameEngine.Scene {
-    constructor() {
+    constructor(backgroundEntity=null) {
         super('PauseMenu');
+
+        if (backgroundEntity != null) this.addChild(backgroundEntity);
 
         var centerX = wrk.GameEngine.canvasSize.x / 2;
 

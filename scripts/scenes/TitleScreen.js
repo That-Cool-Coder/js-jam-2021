@@ -1,6 +1,8 @@
 class TitleScreen extends wrk.GameEngine.Scene {
-    constructor() {
+    constructor(backgroundEntity=null) {
         super('TitleScreen');
+
+        if (backgroundEntity != null) this.addChild(backgroundEntity);
 
         var center = wrk.v.copyDiv(wrk.GameEngine.canvasSize, 2);
 

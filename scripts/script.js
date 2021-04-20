@@ -30,9 +30,9 @@ var settings = {
 
 // Setup scenes
 var mainScene = new MainScene();
-var levelSelectScene = new LevelSelectScene();
-var titleScreen = new TitleScreen();
-var pauseMenu = new PauseMenu();
+var levelSelectScene = new LevelSelectScene(new BoidsBackground());
+var titleScreen = new TitleScreen(new BoidsBackground());
+var pauseMenu = new PauseMenu(new BoidsBackground());
 
 // Wait for a user interaction before starting music
 var hasStartedMainTheme = false;

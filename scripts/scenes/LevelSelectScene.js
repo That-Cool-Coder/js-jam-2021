@@ -3,8 +3,10 @@ class LevelSelectScene extends wrk.GameEngine.Scene {
     levelButtonSize = wrk.v(50, 50);
     levelButtonVerticalSeperation = 75;
 
-    constructor() {
+    constructor(backgroundEntity=null) {
         super('LevelSelectScene');
+
+        if (backgroundEntity != null) this.addChild(backgroundEntity);
 
         var heading = new wrk.GameEngine.Label('heading', 'Select a level',
             wrk.v(wrk.GameEngine.canvasSize.x / 2, 50), wrk.PI, config.headingTextStyle);
