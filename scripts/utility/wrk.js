@@ -228,11 +228,11 @@ wrk.dom.id = function(id) {
 }
 
 wrk.dom.viewportWidth = function() {
-    return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    return Math.min(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 }
 
 wrk.dom.viewportHeight = function() { 
-    return Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    return Math.min(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 }
 
 wrk.dom.viewportSize = function() {
