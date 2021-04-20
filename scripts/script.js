@@ -6,8 +6,14 @@ wrk.GameEngine.init(config.targetSize, 1, config.bgColor);
 function resizeCanvas() {
     var targetAspectRatio = config.targetSize.x / config.targetSize.y;
     var availableArea = wrk.v.copySub(wrk.dom.viewportSize(), config.padding);
-    var availableAspectRatio = availableArea.x / availableArea.y;
 
+    // There is a weird bug on chromebooks where the window size is too big.
+    // To counteract that, if on chromeOS, remove an amount to fix this
+    if (/\bCrOS\b/.test(navigator.userAgent)) {
+        wrk.v.sub(availableArea, config.chromebookExtraPadding);
+    }
+
+    var availableAspectRatio = availableArea.x / availableArea.y;
 
     // If the target is 'wider' than the window
     if (targetAspectRatio > availableAspectRatio) {

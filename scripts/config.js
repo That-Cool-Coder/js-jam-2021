@@ -6,6 +6,7 @@ const config = {
     bgColor : 0x757575,
     targetSize : wrk.v(800, 450), // 16:9
     padding : wrk.v(10, 10),
+    chromebookExtraPadding : wrk.v(100, 100), // see resize function in script.js
     version : 0,
 
     // If delta time is greater than this then pause
