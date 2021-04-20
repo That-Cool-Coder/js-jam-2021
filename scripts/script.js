@@ -36,10 +36,12 @@ var pauseMenu = new PauseMenu(new BoidsBackground());
 
 // Wait for a user interaction before starting music
 var hasStartedMainTheme = false;
-wrk.GameEngine.mouse.onPointerDown.add(() => {
+wrk.GameEngine.mouse.onPointerUp.add(() => {
     if (! hasStartedMainTheme) {
-        config.mainThemeSong.loop();
-        hasStartedMainTheme = true;
+        setTimeout(() => {
+            config.mainThemeSong.loop();
+            hasStartedMainTheme = true;
+        }, 100);
     }
 })
 
