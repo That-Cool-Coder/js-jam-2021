@@ -28,5 +28,9 @@ class TitleScreen extends wrk.GameEngine.Scene {
             window.open(config.aboutPageUrl, '_blank');
         });
         this.addChild(aboutButton);
+
+        var creditsText = new wrk.GameEngine.Label('credits', config.creditsText,
+            wrk.v(center.x, wrk.GameEngine.canvasSize.y - 50), wrk.PI, config.hintTextStyle);
+        this.addChild(creditsText);
     }
 }

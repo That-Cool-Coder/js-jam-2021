@@ -2,6 +2,7 @@
 
 const config = {
     gameName : 'Grey Mirrors',
+    creditsText : 'Made by ThatCoolCoder for the Gamedev.js Jam 2021',
     aboutPageUrl : 'https://thatcoolcoder.itch.io/js-jam-2021',
     bgColor : 0x757575,
     targetSize : wrk.v(800, 450), // 16:9
