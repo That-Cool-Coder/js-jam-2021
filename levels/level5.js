@@ -21,6 +21,6 @@ const level5 = {
         {type : 'Finish', position : wrk.v(75, 400), forMirroredPlayer : false},
         {type : 'Finish', position : wrk.v(125, 400), forMirroredPlayer : true},
 
-        {type : 'Hint', text : 'Even simple-looking levels like this one can be difficult', position : wrk.v(config.targetSize.x / 2, 50)}
+        {type : 'Hint', text : 'Simple-looking levels like this\nare often more difficult than they appear', position : wrk.v(config.targetSize.x / 2, 50)}
     ]
 }

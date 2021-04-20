@@ -1,5 +1,5 @@
 class Laser extends wrk.GameEngine.DrawableEntity {
-    // This is static because it is used in super()
+    // This is static because it is used in super
     static size = wrk.v(30, 15);
 
     color = 0x999999;
@@ -70,6 +70,11 @@ class Laser extends wrk.GameEngine.DrawableEntity {
 
             // If we did get a collision, then either reflect or terminate
             if (closestContactEntity != null) {
+
+                if (closestContactEntity.onHitByLaser != undefined) {
+                    closestContactEntity.onHitByLaser(closestContactPosition);
+                }
+
                 if (closestContactEntity.tags.includes('Mirror')) {
                     var mirror = closestContactEntity;
                     var beamDisplacement = wrk.v.copySub(

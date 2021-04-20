@@ -10,7 +10,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     moveDeceleration = 600;
     maxSpeed = 150;
     jumpSpeed = -375;
-    physicsAccuracy = 3;
+    physicsAccuracy = 4;
     gravity = wrk.v(0, 550);
 
     worldComponentInteractions = {
@@ -171,6 +171,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     }
 
     collisionSide(component) {
+        // Return what side of us is hitting component
         return rectRectCollisionSide(this.topLeftPos, this.textureSize,
             component.topLeftPos, component.size);
     }
@@ -213,5 +214,9 @@ class Player extends wrk.GameEngine.DrawableEntity {
             this.isTouchingFinish = true;
         }
         this.collideWithWorldComponent(component);
+    }
+
+    onHitByLaser() {
+        this.die();
     }
 }

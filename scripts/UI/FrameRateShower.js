@@ -1,5 +1,6 @@
 class FrameRateShower extends wrk.GameEngine.Label {
     frameRateUpdateInterval = 5;
+    warningFrameRate = 40;
 
     constructor(localPosition, localAngle, format) {
         super('frame rate shower', '', localPosition, localAngle, format);
@@ -9,10 +10,12 @@ class FrameRateShower extends wrk.GameEngine.Label {
     }
 
     update() {
-        this.runningTotal += 1 / wrk.GameEngine.deltaTime;
+        var crntFrameRate = 1 / wrk.GameEngine.deltaTime;
+        this.runningTotal += crntFrameRate;
         this.counter += 1;
 
-        if (this.counter >= this.frameRateUpdateInterval) {
+        if (this.counter >= this.frameRateUpdateInterval ||
+            crntFrameRate < this.warningFrameRate) {
             this.counter = 0;
             var mean = this.runningTotal / this.frameRateUpdateInterval;
             this.setText(String(wrk.round(mean)));

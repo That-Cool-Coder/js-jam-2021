@@ -21,8 +21,6 @@ const level6 = {
         // Thing to stop player going over top
         {type : 'Wall', position : wrk.v(650, 0), size : wrk.v(150, 20)},
 
-        // Overhang
-        {type : 'Wall', position : wrk.v(650, 250), size : wrk.v(20, 40)},
         // Starting platform
         {type : 'Wall', position : wrk.v(650, 350), size : wrk.v(150, 20)},
         // Mid air platforms
@@ -38,6 +36,6 @@ const level6 = {
         // Blocker
         {type : 'Wall', position : wrk.v(130, 180), size : wrk.v(20, 150)},
 
-        {type : 'Hint', text : 'This level is hard due to the platformer aspect', position : wrk.v(config.targetSize.x / 2, 50)}
+        {type : 'Hint', text : 'Good luck landing on those tiny platforms', position : wrk.v(config.targetSize.x / 2, 50)}
     ]
 }
