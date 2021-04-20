@@ -18,10 +18,6 @@ const level1 = {
         {type : 'Finish', position : wrk.v(225, 200), forMirroredPlayer : true},
         {type : 'Finish', position : wrk.v(525, 200), forMirroredPlayer : false},
 
-        {type : 'Laser', position : wrk.v(400, 380), angle : 0},
-
-        {type : 'Mirror', position : wrk.v(600, 380), angle : -0.3, width : 20},
-
         {type : 'Hint', text : 'Control the white player using the arrow keys or WASD.\n\nThe black player will mirror your movements.\n\nGet both players to their finish points to complete the level.', position : wrk.v(config.targetSize.x / 2, 50)}
     ]
 }

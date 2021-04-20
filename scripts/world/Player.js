@@ -50,6 +50,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
 
     update() {
         if (! this.isFrozen && wrk.GameEngine.deltaTime < config.maxAllowableDeltaTime) {
+            this.walkableObjectsCache = wrk.GameEngine.getEntitiesWithTag('WalkableObject');
             this.checkGrounded();
             this.feelGravity();
             if (this.isGrounded) this.velocity.y = 0;
@@ -130,7 +131,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     // ---------------
 
     interactWithWorld() {
-        wrk.GameEngine.getEntitiesWithTag('WalkableObject').forEach(c => {
+        this.walkableObjectsCache.forEach(c => {
             var func = this.worldComponentInteractions[c.type];
             if (func != undefined) {
                 func(c);
@@ -150,8 +151,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
 
         // Use a for...of instead of a foreach to allow break
         var grounded = false;
-        var worldComponents = wrk.GameEngine.getEntitiesWithTag('WalkableObject');
-        for (var component of worldComponents) {
+        for (var component of this.walkableObjectsCache) {
             if (this.collisionSide(component) == 'bottom') {
                 grounded = true;
                 break;
