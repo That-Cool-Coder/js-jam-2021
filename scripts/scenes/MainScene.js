@@ -71,7 +71,7 @@ class MainScene extends wrk.GameEngine.Scene {
 
         // Move ui to front
         this.removeChild(this.ui);
-        this.addChild(this.ui);
+        if (! config.noUiInMainScene) this.addChild(this.ui);
 
         this.showingFinishSequence = false;
     }
@@ -95,6 +95,15 @@ class MainScene extends wrk.GameEngine.Scene {
 
     restartCrntLevel() {
         this.loadLevel(this.cachedLevelData);
+    }
+
+    onPlayerDie() {
+        this.normalPlayer.setFrozen(true);
+        this.mirroredPlayer.setFrozen(true);
+        SceneTransitionFade.fade('in', () => {
+            this.restartCrntLevel();
+            SceneTransitionFade.fade('out');
+        });
     }
 
     update() {

@@ -10,7 +10,7 @@ class Player extends wrk.GameEngine.DrawableEntity {
     moveDeceleration = 600;
     maxSpeed = 150;
     jumpSpeed = -375;
-    physicsAccuracy = 4;
+    physicsAccuracy = 10;
     gravity = wrk.v(0, 550);
 
     worldComponentInteractions = {
@@ -120,11 +120,9 @@ class Player extends wrk.GameEngine.DrawableEntity {
     }
 
     die() {
-        this.setFrozen(true);
-        SceneTransitionFade.fade('in', () => {
-            mainScene.restartCrntLevel();
-            SceneTransitionFade.fade('out');
-        });
+        if (! this.isFrozen) {
+            mainScene.onPlayerDie();
+        }
     }
     
     // Collision stuff

@@ -3,12 +3,11 @@
 const config = {
     gameName : 'Grey Mirrors',
     creditsText : 'Made by ThatCoolCoder for the Gamedev.js Jam 2021',
-    aboutPageUrl : 'https://thatcoolcoder.itch.io/js-jam-2021',
+    aboutPageUrl : 'https://thatcoolcoder.itch.io/greymirrors',
     bgColor : 0x757575,
     targetSize : wrk.v(800, 450), // 16:9
     padding : wrk.v(10, 10),
     chromebookExtraPadding : wrk.v(100, 100), // see resize function in script.js
-    version : 0,
 
     // If delta time is greater than this then pause
     // (stops things falling through other things)
@@ -16,6 +15,9 @@ const config = {
 
     normalPlayerColor : 0xffffff,
     mirroredPlayerColor : 0x000000,
+
+    // For promotional images
+    noUiInMainScene : false,
 
     hintTextStyle : {
         fill: "white",

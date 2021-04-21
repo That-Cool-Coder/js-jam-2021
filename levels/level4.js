@@ -25,6 +25,6 @@ const level4 = {
         {type : 'Finish', position : wrk.v(75, 100), forMirroredPlayer : false},
         {type : 'Finish', position : wrk.v(675, 400), forMirroredPlayer : true},
 
-        {type : 'Hint', text : 'If you get stuck,\n click pause then restart', position : wrk.v(config.targetSize.x / 2, 50)}
+        {type : 'Hint', text : 'If you get stuck,\n click pause then click restart', position : wrk.v(config.targetSize.x / 2, 50)}
     ]
 }
