@@ -2,10 +2,12 @@ class Laser extends wrk.GameEngine.DrawableEntity {
     // This is static because it is used in super
     static size = wrk.v(30, 15);
 
+    beamTexture = wrk.GameEngine.Texture.fromUrl('images/laserBeam.png');
     color = 0x999999;
     beamWidth = 5;
     maxBeamLength = 1000;
     maxBeamReflections = 2;
+    hittableObjectTags = ['Player', 'Wall', 'Mirror', 'Laser'];
 
     constructor(centerPos, angle) {
 
@@ -20,8 +22,11 @@ class Laser extends wrk.GameEngine.DrawableEntity {
     }
 
     projectBeam() {
-        wrk.dom.clearLogPara();
-        this.beamBouncePositions = [this.globalPosition];
+        var startPos = this.globalPosition;
+        var offset = wrk.v(this.textureSize.x / 2, 0);
+        wrk.v.rotate(offset, this.globalAngle);
+        wrk.v.add(startPos, offset);
+        this.beamBouncePositions = [startPos];
         var prevAngle = this.globalAngle;
 
         for (var i = 0; i < this.maxBeamReflections; i ++) {
@@ -38,7 +43,7 @@ class Laser extends wrk.GameEngine.DrawableEntity {
             var closestContactEntity = null;
 
             // These are all of the entities which we can interact with
-            var targetEntities = wrk.GameEngine.getEntitiesWithTags(['Player', 'Wall', 'Mirror']);
+            var targetEntities = wrk.GameEngine.getEntitiesWithTags(this.hittableObjectTags);
             
             // Use a for..of to allow continue if entity = this
             for (var entity of targetEntities) {
@@ -103,19 +108,24 @@ class Laser extends wrk.GameEngine.DrawableEntity {
     }
 
     drawBeam() {
+        var thisGlobalPosition = this.globalPosition;
+        var thisGlobalAngle = this.globalAngle;
+
         // Presumes that all beam segments from last frame have been removed
-        wrk.v.sub(this.beamBouncePositions[0], this.globalPosition);
+        wrk.v.sub(this.beamBouncePositions[0], thisGlobalPosition);
+        wrk.v.rotate(this.beamBouncePositions[0], -thisGlobalAngle);
         for (var i = 0; i < this.beamBouncePositions.length - 1; i ++) {
             var crntBouncePosition = this.beamBouncePositions[i];
             var nextBouncePosition = this.beamBouncePositions[i + 1];
-            wrk.v.sub(nextBouncePosition, this.globalPosition);
+            wrk.v.sub(nextBouncePosition, thisGlobalPosition);
+            wrk.v.rotate(nextBouncePosition, -thisGlobalAngle);
 
             var middle = wrk.v.mean(crntBouncePosition, nextBouncePosition);
             var angle = wrk.v.heading(wrk.v.copySub(crntBouncePosition, nextBouncePosition));
             var length = wrk.v.dist(crntBouncePosition, nextBouncePosition);
             
             var beamSprite = new wrk.GameEngine.DrawableEntity('Beam segment',
-                middle, angle, PIXI.Texture.WHITE, wrk.v(length, this.beamWidth));
+                middle, angle, this.beamTexture, wrk.v(length, this.beamWidth));
             this.addChild(beamSprite);
             beamSprite.updateSpritePosition(); // make it not flicker - will be fixed in future wrk
         }
