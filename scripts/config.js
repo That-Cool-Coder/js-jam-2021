@@ -18,8 +18,10 @@ const config = {
     normalPlayerColor : 0xffffff,
     mirroredPlayerColor : 0x000000,
 
-    // For promotional images
-    noUiInMainScene : false,
+    // For dev/release/promoimage switching
+    // Note that if ui is turned off then frame rate is too
+    showMainUi : true,
+    showFrameRate : true,
 
     hintTextStyle : {
         fill: "white",

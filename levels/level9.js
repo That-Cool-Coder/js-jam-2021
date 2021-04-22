@@ -33,6 +33,6 @@ const level9 = {
         {type : 'Finish', position : wrk.v(75, 400), forMirroredPlayer : false},
         {type : 'Finish', position : wrk.v(475, 400), forMirroredPlayer : true},
 
-        {type : 'Hint', text : 'Lasers make it more "fun"', position : wrk.v(config.targetSize.x / 2, 50)}
+        {type : 'Hint', text : 'Lasers make it "fun"', position : wrk.v(config.targetSize.x / 2, 50)}
     ]
 }
