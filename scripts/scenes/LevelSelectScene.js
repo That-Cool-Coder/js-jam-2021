@@ -1,7 +1,8 @@
 class LevelSelectScene extends wrk.GameEngine.Scene {
     maxLevelsPerRow = 5;
     levelButtonSize = wrk.v(50, 50);
-    levelButtonVerticalSeperation = 75;
+    firstLevelButtonRowHeight = 180;
+    levelButtonVerticalSeperation = 130;
 
     constructor(backgroundEntity=null) {
         super('LevelSelectScene');
@@ -38,7 +39,7 @@ class LevelSelectScene extends wrk.GameEngine.Scene {
         var buttonSeperation = wrk.GameEngine.canvasSize.x / this.maxLevelsPerRow;
         levelList.forEach(level => {
             var pos = wrk.v(buttonSeperation * crntCol + buttonSeperation / 2,
-                this.levelButtonVerticalSeperation * crntRow + 150);
+                this.levelButtonVerticalSeperation * crntRow + this.firstLevelButtonRowHeight);
 
             if (ProgressManagement.hasUnlockedLevel(level.levelNum)) {
                 var texture = config.buttonTexture1x1;

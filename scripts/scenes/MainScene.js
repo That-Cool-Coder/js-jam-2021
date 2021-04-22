@@ -16,11 +16,11 @@ class MainScene extends wrk.GameEngine.Scene {
         var frameRateShower = new FrameRateShower(wrk.v(50, 50), wrk.PI, {fill:0xffffff});
         this.ui.addChild(frameRateShower);
 
-        var pos = wrk.v.copySub(wrk.GameEngine.canvasSize, wrk.v(20, 25));
+        var pos = wrk.v(110, wrk.GameEngine.canvasSize.y - 25);
         var muteButton = new MuteButton(pos);
         this.ui.addChild(muteButton);
 
-        var pos = wrk.v.copySub(wrk.GameEngine.canvasSize, wrk.v(90, 25));
+        var pos = wrk.v(50, wrk.GameEngine.canvasSize.y - 25);
         var pauseButton = new wrk.GameEngine.Button('pauseButton', pos, wrk.PI,
             wrk.v(90, 40), config.buttonTexture1x2, 'Pause', config.normalTextStyle);
         pauseButton.mouseUpCallbacks.add(() => {
@@ -49,7 +49,7 @@ class MainScene extends wrk.GameEngine.Scene {
                     var item = new Finish(datum.position, datum.forMirroredPlayer);
                     break;
                 case 'Laser':
-                    var item = new Laser(datum.position, datum.angle);
+                    var item = new Laser(datum.position, datum.angle, datum.spinRate);
                     break;
                 case 'Mirror':
                     var item = new Mirror(datum.position, datum.angle, datum.width);

@@ -39,6 +39,7 @@ var mainScene = new MainScene();
 var levelSelectScene = new LevelSelectScene(new BoidsBackground());
 var titleScreen = new TitleScreen(new BoidsBackground());
 var pauseMenu = new PauseMenu(new BoidsBackground());
+var loadingScene = new LoadingScene();
 
 // Wait for a user interaction before starting music
 var hasStartedMainTheme = false;
@@ -51,4 +52,7 @@ wrk.GameEngine.mouse.onPointerUp.add(() => {
     }
 })
 
-wrk.GameEngine.selectScene(titleScreen);
+wrk.GameEngine.selectScene(loadingScene);
+setTimeout(() =>{
+    wrk.GameEngine.selectScene(titleScreen);
+}, config.loadingSceneDuration);

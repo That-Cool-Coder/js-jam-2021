@@ -9,12 +9,13 @@ class Laser extends wrk.GameEngine.DrawableEntity {
     maxBeamReflections = 2;
     hittableObjectTags = ['Player', 'Wall', 'Mirror', 'Laser'];
 
-    constructor(centerPos, angle) {
+    constructor(centerPos, angle, spinRate=0) {
 
         super('Laser', centerPos, angle, PIXI.Texture.WHITE, Laser.size);
         this.addTag('Laser');
+        this.spinRate = spinRate;
 
-        this.setTint(this.color)
+        this.setTint(this.color);
 
         this.beamBouncePositions = [];
 
@@ -132,6 +133,7 @@ class Laser extends wrk.GameEngine.DrawableEntity {
     }
 
     update() {
+        this.localAngle += this.spinRate * wrk.GameEngine.deltaTime;
         this.projectBeam();
         this.drawBeam();
     }

@@ -9,6 +9,8 @@ const config = {
     padding : wrk.v(10, 10),
     chromebookExtraPadding : wrk.v(100, 100), // see resize function in script.js
 
+    loadingSceneDuration : wrk.randint(500, 1500),
+
     // If delta time is greater than this then pause
     // (stops things falling through other things)
     maxAllowableDeltaTime : 0.1,
