@@ -1,6 +1,6 @@
 const level7 = {
     levelNum : 7,
-    normalPlayerStartPos : wrk.v(50, 350),
+    normalPlayerStartPos : wrk.v(250, 350),
     mirroredPlayerStartPos : wrk.v(750, 350),
 
     world : [
@@ -16,6 +16,6 @@ const level7 = {
         {type : 'Finish', position : wrk.v(350, 310), forMirroredPlayer : false},
         {type : 'Finish', position : wrk.v(400, 310), forMirroredPlayer : true},
 
-        {type : 'Hint', text : '*Enter hint here*', position : wrk.v(config.targetSize.x / 2, 50)}
+        {type : 'Hint', text : 'Even simpler, even harder', position : wrk.v(config.targetSize.x / 2, 50)}
     ]
 }

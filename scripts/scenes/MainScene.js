@@ -13,14 +13,13 @@ class MainScene extends wrk.GameEngine.Scene {
         this.normalPlayer = new Player('normalPlayer', wrk.v(0, 0));
         this.mirroredPlayer = new Player('mirroredPlayer', wrk.v(0, 0), true);
 
-        var frameRateShower = new FrameRateShower(wrk.v(50, 50), wrk.PI, {fill:0xffffff});
-        this.ui.addChild(frameRateShower);
-
         if (config.showFrameRate) {
-            var pos = wrk.v(110, wrk.GameEngine.canvasSize.y - 25);
-            var muteButton = new MuteButton(pos);
-            this.ui.addChild(muteButton);
+            var frameRateShower = new FrameRateShower(wrk.v(50, 50), wrk.PI, {fill:0xffffff});
+            this.ui.addChild(frameRateShower);
         }
+        var pos = wrk.v(110, wrk.GameEngine.canvasSize.y - 25);
+        var muteButton = new MuteButton(pos);
+        this.ui.addChild(muteButton);
 
         var pos = wrk.v(50, wrk.GameEngine.canvasSize.y - 25);
         var pauseButton = new wrk.GameEngine.Button('pauseButton', pos, wrk.PI,

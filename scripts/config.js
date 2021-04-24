@@ -21,7 +21,7 @@ const config = {
     // For dev/release/promoimage switching
     // Note that if ui is turned off then frame rate is too
     showMainUi : true,
-    showFrameRate : true,
+    showFrameRate : false,
 
     hintTextStyle : {
         fill: "white",
