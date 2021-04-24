@@ -84,7 +84,11 @@ class MainScene extends wrk.GameEngine.Scene {
             effect.play();
         });
         this.showingFinishSequence = true;
-        ProgressManagement.unlockNextLevel();
+        
+        // If this is the highest level unlocked so far, then unlock the next
+        if (ProgressManagement.highestLevelUnlocked == this.cachedLevelData.levelNum) {
+            ProgressManagement.unlockNextLevel();
+        }
 
         setTimeout(() => {
             SceneTransitionFade.fade('in', () => {
